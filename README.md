@@ -7,7 +7,7 @@ Place your php files inside php/ dir, commit and push.
 ## Usage
 
 ```bash
-$ rhc app create phpfpm https://reflector-getupcloud.getup.io/reflect?github=getupcloud/openshift-nginx-php-fpm
+$ rhc app create phpfpm https://reflector-getupcloud.getup.io/reflect?github=ranib/openshift-nginx-php-fpm\&v=5.4
 $ cd phpfpm
 $ echo '<?php phpinfo(); ?>' > php/info.php
 $ echo 'Hello World' >> www/static/hello.html
