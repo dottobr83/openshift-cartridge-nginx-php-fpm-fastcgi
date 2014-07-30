@@ -19,6 +19,7 @@ To add mysql cartridge
 $ rhc cartridge add mysql-5.5 -a <appname>
 
 To add Wordpress
+$ cd <appname>
 $ git remote add upstream https://github.com/openshift/wordpress-example
 $ git pull upstream master
 ## fix conflicts, edit wp-config then commit the result ##
