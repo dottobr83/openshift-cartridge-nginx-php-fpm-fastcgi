@@ -15,8 +15,16 @@ $ git add .
 $ git commit -m 'Testing'
 $ git push
 
-add mysql cartridge
+To add mysql cartridge
 $ rhc cartridge add mysql-5.5 -a <appname>
+
+To add Wordpress
+$ git remote add upstream https://github.com/openshift/wordpress-example
+$ git pull upstream master
+## fix conflicts, edit wp-config then commit the result ##
+$ git add -A
+$ git commit -am 'install wordpress'
+$ git push
 ```
 
 ## User-defined configuration
