@@ -1,4 +1,4 @@
-# OpenShift Nginx 1.6.0 PHP-FPM 5.4 Cartridge
+# OpenShift Nginx 1.6.1 PHP-FPM 5.4 Cartridge
 This cartridge serves static content using nginx web server, passing requests to .php files down to php-fpm.
 
 Place your static files inside www/static dir, commit and push.
