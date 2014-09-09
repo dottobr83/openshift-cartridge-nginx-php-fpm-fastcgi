@@ -45,15 +45,15 @@ server {
     # Add trailing slash to */wp-admin requests.
     rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
-    # php file goes straigth to backend
+    # php file goes straigth to backend (php-fpm/php-fcgi server)
     location ~ \.php$ {
       root <%= ENV['OPENSHIFT_REPO_DIR'] %>/php;
+      fastcgi_pass <%= ENV['OPENSHIFT_PHP_FPM_IP'] %>:<%= ENV['OPENSHIFT_PHP_FPM_PORT'] %>;
       fastcgi_index index.php;
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
       try_files $uri /index.php; 
       include fastcgi_params;
       include openshift_params;
-      fastcgi_pass <%= ENV['OPENSHIFT_PHP_FPM_IP'] %>:<%= ENV['OPENSHIFT_PHP_FPM_PORT'] %>;
 
       fastcgi_cache_bypass $skip_cache;
             fastcgi_no_cache $skip_cache;
@@ -86,7 +86,6 @@ server {
     location = /favicon.php { access_log off; log_not_found off; }
     location = /robots.txt { access_log off; log_not_found off; }
     
-    # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
     # Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
     location ~ /\. { deny  all; access_log off; log_not_found off; }
     
