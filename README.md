@@ -33,5 +33,11 @@ $ git push
 Place your nginx .conf files inside config/nginx.d/. It will be include()ed from "http" scope.
 Place your php-fpm .conf files inside config/php-fpm.d/. It will be include()ed from main php-fpm.conf file.
 
+## Added fastcgi_cache with conditional purging 
+Sources of info include:
+https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
+https://vpsboard.com/topic/108-nginx-wordpress-with-caching/
+http://centminmod.com/nginx_configure_wordpress.html#fastcgicache
+
 ## nginx is configured with
 ./configure --prefix=${OPENSHIFT_PHP_DIR}/usr/share/nginx --sbin-path=${OPENSHIFT_PHP_DIR}/usr/sbin/nginx --conf-path=${OPENSHIFT_PHP_DIR}/configuration/etc/nginx.conf --pid-path=${OPENSHIFT_PHP_DIR}/run/nginx.pid --error-log-path=${OPENSHIFT_PHP_LOG_DIR}/nginx_error.log --http-log-path=${OPENSHIFT_PHP_LOG_DIR}/nginx_access.log --http-client-body-temp-path=${TMP}/nginx/client_body --http-proxy-temp-path=${TMP}/nginx/proxy --http-fastcgi-temp-path=${TMP}/nginx/fastcgi --http-uwsgi-temp-path=${TMP}/nginx/uwsgi --http-scgi-temp-path=${TMP}/nginx/scgi --user=${USER} --group=${USER} --with-file-aio --with-ipv6 --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module --with-http_image_filter_module --with-http_geoip_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_stub_status_module --with-mail --with-mail_ssl_module --with-debug --add-module=../headers-more-nginx-module-0.25 --add-module=../echo-nginx-module-0.53 --add-module=../ngx_cache_purge-2.1 --with-pcre=../pcre-8.35
