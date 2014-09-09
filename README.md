@@ -34,7 +34,7 @@ Place your nginx .conf files inside config/nginx.d/. It will be include()ed from
 Place your php-fpm .conf files inside config/php-fpm.d/. It will be include()ed from main php-fpm.conf file.
 
 ## Added fastcgi_cache with conditional purging 
-Sources of info include:
+Sources of info include:<br>
 https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/
 https://vpsboard.com/topic/108-nginx-wordpress-with-caching/
 http://centminmod.com/nginx_configure_wordpress.html#fastcgicache
