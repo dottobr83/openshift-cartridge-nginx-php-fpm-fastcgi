@@ -39,6 +39,7 @@ server {
 
     #note location{] block is simple now as caching is done on nginx's end
     location / {
+      index index.html index.htm index.php;
       try_files $uri $uri/ /index.php?$args;
     }    
 
