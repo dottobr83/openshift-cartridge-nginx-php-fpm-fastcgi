@@ -22,12 +22,11 @@ To add Wordpress
 $ cd <appname>
 $ git remote add upstream https://github.com/openshift/wordpress-example
 $ git pull upstream master
-## fix conflicts in action_hooks/deploy 
-## edit wp-config.php file (change FORCE_SSL_ADMIN to false), 
-## then commit
+## fix conflicts in action_hooks/deploy | edit wp-config.php file (change FORCE_SSL_ADMIN to false) | then commit ##
 $ git add -A
 $ git commit -am 'install wordpress'
 $ git push
+## Add 'Nginx Helper' plugin to purge fastcgi cache
 ```
 
 ## User-defined configuration
