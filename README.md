@@ -34,7 +34,7 @@ $ git push
 Place your nginx .conf files inside config/nginx.d/. It will be include()ed from "http" scope.
 Place your php-fpm .conf files inside config/php-fpm.d/. It will be include()ed from main php-fpm.conf file.
 
-## Added fastcgi_cache with conditional purging 
+## Added fastcgi_cache with conditional purging for Wordpress
 Sources of info include:<br>
 https://rtcamp.com/wordpress-nginx/tutorials/single-site/fastcgi-cache-with-purging/<br>
 https://vpsboard.com/topic/108-nginx-wordpress-with-caching/<br>
