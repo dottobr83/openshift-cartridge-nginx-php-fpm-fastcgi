@@ -89,11 +89,6 @@ server {
     location = /favicon.php { access_log off; log_not_found off; }
     location = /robots.txt { access_log off; log_not_found off; }
     
-    # Serving static files under /static/
-    location /static/ {
-        try_files $uri $uri/ =404;
-    }
-    
     # Add Expires headers as recommended by YSlow
     location ~* \.(png|gif|jpg|jpeg|css|js|swf|ico|txt|xml|bmp|pdf|doc|docx|ppt|pptx|zip)$ {
             access_log off;
