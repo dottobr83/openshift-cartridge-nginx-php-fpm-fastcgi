@@ -76,4 +76,10 @@ types {
     video/x-ms-asf                        asx asf;
     video/x-ms-wmv                        wmv;
     video/x-msvideo                       avi;
+    
+    font/ttf                              ttf;
+    font/opentype                         otf;
+    application/font-woff                 woff;
+    application/x-font-woff               woff;
+    application/vnd.ms-fontobject         eot;
 }
