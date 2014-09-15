@@ -125,7 +125,7 @@ server {
     location = /favicon.php { access_log off; log_not_found off; }
     location = /robots.txt { access_log off; log_not_found off; }
     
-    # Add Expires headers as recommended by YSlow
+    # Cache static content (same as) Add Expires headers recommended by YSlow
     location ~* \.(png|gif|jpg|jpeg|css|js|swf|ico|txt|xml|bmp|pdf|doc|docx|ppt|pptx|zip)$ {
             access_log off;
             expires 30d;
