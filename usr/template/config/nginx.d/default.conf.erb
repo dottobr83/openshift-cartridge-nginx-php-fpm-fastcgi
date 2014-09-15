@@ -1,8 +1,45 @@
-# This file is edited for fastcgi_cache with conditional purging to work with Wordpress install
-fastcgi_cache_path <%= ENV['TMP'] %>/nginx/nginx-cache levels=1:2 keys_zone=WORDPRESS:32m inactive=60m;
-fastcgi_cache_key "$scheme$request_method$host$request_uri";
-fastcgi_cache_use_stale error timeout invalid_header http_500;
-fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+    # for fastcgi_cache with conditional purging to work with Wordpress
+    fastcgi_cache_path <%= ENV['TMP'] %>/nginx/nginx-cache levels=1:2 keys_zone=WORDPRESS:32m inactive=60m;
+    fastcgi_cache_key "$scheme$request_method$host$request_uri";
+    fastcgi_cache_use_stale error timeout invalid_header http_500;
+    fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+    
+    access_log off;
+    keepalive_timeout  60 15;
+    keepalive_requests 200;
+    types_hash_max_size 2048;
+    reset_timedout_connection on;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay off;
+    port_in_redirect off;
+    server_tokens off;
+
+    gzip on;
+    gzip_disable "msie6";
+    gzip_min_length 256;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    
+    open_file_cache max=10000 inactive=30s;
+    open_file_cache_valid    60s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors   on;
+
+    client_header_timeout  10m;
+    client_body_timeout    10m;
+    send_timeout           10m;
+    proxy_read_timeout     2m;
+    fastcgi_read_timeout   3m;
+    
+    client_header_buffer_size    1k;
+    large_client_header_buffers  4 4k;
+    output_buffers   1 32k;
+    postpone_output  1460;
 
 server {
     root              <%= ENV['OPENSHIFT_REPO_DIR'] %>/php;
@@ -38,7 +75,7 @@ server {
       set $skip_cache 1;
     }
 
-    #note location{] block is simple now as caching is done on nginx's end
+    # note location block is simple now as caching is done on nginx's end
     location / {
       index index.html index.htm index.php;
       try_files $uri $uri/ /index.php?$args;
@@ -126,35 +163,4 @@ server {
         location ~* (roundcube|webdav|smtp|http\:|soap|w00tw00t) {
             return 444;
     }
-    
-    gzip on;
-	gzip_disable "msie6";
-
-	gzip_vary on;
-	gzip_proxied any;
-	gzip_comp_level 6;
-	gzip_buffers 16 8k;
-	gzip_http_version 1.1;
-	gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-
-    client_header_timeout  10m;
-    client_body_timeout    10m;
-    send_timeout           10m;
-    proxy_read_timeout     2m;
-    fastcgi_read_timeout   3m;
-    
-    client_header_buffer_size    1k;
-    large_client_header_buffers  4 4k;
-
-    output_buffers   1 32k;
-    postpone_output  1460;
-
-    keepalive_timeout  60 15;
-    types_hash_max_size 2048;
-
-    port_in_redirect off;
-    server_tokens off;
-    sendfile on;
-    tcp_nopush on; # off may be better for Comet/long-poll stuff
-    tcp_nodelay off; # on may be better for Comet/long-poll stuff
 }
