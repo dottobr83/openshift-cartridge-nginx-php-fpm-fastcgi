@@ -86,30 +86,17 @@ server {
 
     # php file goes straigth to backend (php-fpm/php-fcgi server)
     location ~ \.php$ {
-      root <%= ENV['OPENSHIFT_REPO_DIR'] %>/php;
+      include <%= ENV['OPENSHIFT_PHP_DIR'] %>/configuration/etc/fastcgi_params;
+      include <%= ENV['OPENSHIFT_PHP_DIR'] %>/configuration/etc/openshift_params;
       fastcgi_pass <%= ENV['OPENSHIFT_PHP_FPM_IP'] %>:<%= ENV['OPENSHIFT_PHP_FPM_PORT'] %>;
       fastcgi_index index.php;
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-      try_files $uri /index.php; 
-      include fastcgi_params;
-      include openshift_params;
 
       fastcgi_cache_bypass $skip_cache;
             fastcgi_no_cache $skip_cache;
 
       fastcgi_cache WORDPRESS;
       fastcgi_cache_valid  60m;
-    }
-
-    # site root is served by /index.php
-    location ~ ^/$ {
-        root           <%= ENV['OPENSHIFT_REPO_DIR'] %>/php;
-        fastcgi_pass   <%= ENV['OPENSHIFT_PHP_FPM_IP'] %>:<%= ENV['OPENSHIFT_PHP_FPM_PORT'] %>;
-        fastcgi_param  SCRIPT_FILENAME   $document_root/index.php;
-        include        fastcgi_params;
-        include        openshift_params;
-        # uncomment to export all environment variables to fastcgi
-        #include        <%= ENV['OPENSHIFT_REPO_DIR'] %>/config/nginx.d/export_env;
     }
     
     location ~ /purge(/.*) {
