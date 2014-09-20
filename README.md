@@ -23,11 +23,11 @@ $ cd <appname>
 $ git remote add upstream https://github.com/openshift/wordpress-example
 $ git pull upstream master
 ## 1. fix conflicts in action_hooks/deploy
-2. edit wp-config.php file (change FORCE_SSL_ADMIN to false)
-3. add in wp-config.php file
-/** path to fastcgi cache directory for Nginx Helper plugin */
-define('RT_WP_NGINX_HELPER_CACHE_PATH','/tmp/nginx/nginx-cache');
-4. then commit ##
+## 2. edit wp-config.php file (change FORCE_SSL_ADMIN to false)
+## 3. add in wp-config.php file
+## /** path to fastcgi cache directory for Nginx Helper plugin */
+## define('RT_WP_NGINX_HELPER_CACHE_PATH','/tmp/nginx/nginx-cache');
+## 4. then commit
 $ git add -A
 $ git commit -am 'install wordpress'
 $ git push
