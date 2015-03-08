@@ -83,7 +83,10 @@ server {
 
     # Add trailing slash to */wp-admin requests.
     rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-
+    
+    # WP Rocket Caching Plugin configuration
+    include <%= ENV['OPENSHIFT_PHP_DIR'] %>/configuration/etc/rocket-nginx.conf;
+  
     # php file goes straigth to backend (php-fpm/php-fcgi server)
     location ~ \.php$ {
       include <%= ENV['OPENSHIFT_PHP_DIR'] %>/configuration/etc/fastcgi_params;
